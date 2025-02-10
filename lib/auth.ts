@@ -1,11 +1,16 @@
-﻿import { PrismaAdapter } from "@next-auth/prisma-adapter";
+﻿// lib/auth.ts
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "./prisma";
 import { compare } from "bcryptjs";
-import type { User as PrismaUser } from "@prisma/client"; // Импортируем тип пользователя из Prisma
+import type { User as PrismaUser } from "@prisma/client";
+import type { NextAuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
+    // Адаптер (необязательно при JWT-стратегии,
+    // но может быть полезен, если вы используете NextAuth для OAuth или хранения других данных)
     adapter: PrismaAdapter(prisma),
+
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -14,37 +19,40 @@ export const authOptions = {
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials, req) {
-                // Проверяем, что введены email и пароль
                 if (!credentials?.username || !credentials?.password) {
                     throw new Error("Email and password are required");
                 }
-
-                // Находим пользователя по email
                 const user = await prisma.user.findUnique({
                     where: { email: credentials.username },
                 });
 
-                // Приводим тип полученного объекта к PrismaUser
                 const prismaUser = user as PrismaUser | null;
-
-                // Если пользователь не найден или у него нет поля password, выбрасываем ошибку
                 if (!prismaUser || !prismaUser.password) {
                     throw new Error("No user found with the given email");
                 }
 
-                // Сравниваем введённый пароль с сохранённым хэшем
                 const isValid = await compare(credentials.password, prismaUser.password);
                 if (!isValid) {
                     throw new Error("Incorrect password");
                 }
-
-                // Если всё в порядке – возвращаем объект пользователя
+                // Если всё ок, возвращаем объект пользователя
                 return prismaUser;
             },
         }),
     ],
+
     secret: process.env.NEXTAUTH_SECRET,
+
     pages: {
-        signIn: "/auth/signin", // Путь к кастомной странице входа
+        signIn: "/auth/signin",
     },
+
+    // Указываем, что используем JWT для хранения сессий
+    session: {
+        strategy: "jwt",
+        maxAge: 30 * 24 * 60 * 60, // например, 30 дней
+    },
+
+    // (Опционально) Режим отладки
+    debug: true,
 };

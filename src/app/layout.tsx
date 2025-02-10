@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Providers } from "./providers/providers";
+import {Providers} from "./providers/providers";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -17,11 +17,13 @@ export default function RootLayout({
         <html lang="ru">
         <body>
         <Providers>
-            <Header />
-            <main className="flex-grow container mx-auto px-4 py-6">
-                {children}
-            </main>
-            <Footer />
+            <div className="flex flex-col min-h-screen">
+                <Header/>
+                <main className="flex-grow container mx-auto px-4 py-6">
+                    {children}
+                </main>
+                <Footer/>
+            </div>
         </Providers>
         </body>
         </html>

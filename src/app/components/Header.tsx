@@ -2,31 +2,31 @@
 "use client";
 
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
+import {signIn, signOut, useSession} from "next-auth/react";
 
 export default function Header() {
-    const { data: session, status } = useSession();
+    const {data: session, status} = useSession();
 
     return (
         <header className="navbar bg-base-200">
             {/* Левая часть — название */}
-            <div className="flex-1">
+            <div className="flex pr-2">
                 <Link href="/" className="btn btn-ghost normal-case text-xl">
                     Данные о логистике
                 </Link>
             </div>
 
             {/* Центр — навигационные ссылки */}
-            <div className="flex-none">
+            <div className="flex self-center">
                 <ul className="menu menu-horizontal p-0">
                     <li>
-                        <a href="#">Раздел 1</a>
+                        <a href="/create-entity">Добавить запись</a>
                     </li>
                     <li>
-                        <a href="#">Раздел 2</a>
+                        <a href="/stats">Статистика</a>
                     </li>
                     <li>
-                        <a href="#">Раздел 3</a>
+                        <a href="/logistics">Логистические компании</a>
                     </li>
                 </ul>
             </div>
@@ -38,15 +38,18 @@ export default function Header() {
                 ) : session ? (
                     <div className="flex items-center gap-2">
             <span className="text-sm">
+                Вы вошли как:
+            </span>
+                        <span className="text-sm font-bold">
               {session.user?.name || session.user?.email}
             </span>
-                        <button onClick={() => signOut()} className="btn btn-sm">
-                            Sign Out
+                        <button onClick={() => signOut()} className="btn btn-primary">
+                            Выйти
                         </button>
                     </div>
                 ) : (
-                    <button onClick={() => signIn()} className="btn btn-sm">
-                        Sign In
+                    <button onClick={() => signIn()} className="btn btn-primary">
+                        Войти
                     </button>
                 )}
             </div>

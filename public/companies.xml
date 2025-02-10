@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<companies>
+    <company>
+        <name>DHL</name>
+        <services>Экспресс-доставка, логистика</services>
+        <transportTypes>Авиа, наземная, морская</transportTypes>
+        <geography>Международная</geography>
+        <averageDeliveryTime>24</averageDeliveryTime>
+        <branchCount>2200</branchCount>
+        <customerSatisfaction>92</customerSatisfaction>
+        <additionalServices>Страхование, таможенное оформление</additionalServices>
+        <features>Быстрая доставка, разветвлённая сеть отделений</features>
+    </company>
+    <company>
+        <name>FedEx</name>
+        <services>Экспресс-доставка, логистика</services>
+        <transportTypes>Авиа, наземная, морская</transportTypes>
+        <geography>Международная</geography>
+        <averageDeliveryTime>26</averageDeliveryTime>
+        <branchCount>1900</branchCount>
+        <customerSatisfaction>90</customerSatisfaction>
+        <additionalServices>Экспресс-доставка, таможенное оформление</additionalServices>
+        <features>Надёжность, оперативное обслуживание</features>
+    </company>
+    <company>
+        <name>UPS</name>
+        <services>Логистика и доставка</services>
+        <transportTypes>Авиа, наземная</transportTypes>
+        <geography>Международная</geography>
+        <averageDeliveryTime>28</averageDeliveryTime>
+        <branchCount>2100</branchCount>
+        <customerSatisfaction>91</customerSatisfaction>
+        <additionalServices>Складские услуги, интегрированные логистические решения</additionalServices>
+        <features>Эффективное управление цепочками поставок</features>
+    </company>
+    <company>
+        <name>DB Schenker</name>
+        <services>Логистика и транспорт</services>
+        <transportTypes>Авиа, наземная, железнодорожная</transportTypes>
+        <geography>Международная</geography>
+        <averageDeliveryTime>30</averageDeliveryTime>
+        <branchCount>1800</branchCount>
+        <customerSatisfaction>89</customerSatisfaction>
+        <additionalServices>Таможенное оформление, складирование</additionalServices>
+        <features>Широкий спектр логистических услуг, гибкость решений</features>
+    </company>
+    <company>
+        <name>XPO Logistics</name>
+        <services>Логистика</services>
+        <transportTypes>Авиа, наземная, железнодорожная</transportTypes>
+        <geography>Международная</geography>
+        <averageDeliveryTime>32</averageDeliveryTime>
+        <branchCount>1700</branchCount>
+        <customerSatisfaction>88</customerSatisfaction>
+        <additionalServices>Оптимизация цепочек поставок, складирование</additionalServices>
+        <features>Инновационные IT-решения, адаптивность</features>
+    </company>
+</companies>
