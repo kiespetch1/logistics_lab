@@ -82,7 +82,7 @@ export default function LogisticsPage() {
             <Table
                 titles={titles}
                 rows={rows}
-                defaultSorting={{ column: 0, accending: true }}
+                defaultSorting={{ column: 0, ascending: true }}
                 rightSection={
                     <a
                         href="/companies.xml"
