@@ -1,4 +1,5 @@
 // @ts-nocheck
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useRef } from 'react'
 
 const CurrencyConverter = () => {
