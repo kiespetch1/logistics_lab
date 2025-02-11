@@ -140,7 +140,7 @@ export default function CreateEntityPage() {
     };
 
     return (
-        <div className="p-4">
+        <div className="p-4 flex flex-col min-w-96">
             <h1 className="text-2xl font-bold mb-4">Создание объектов</h1>
 
             <form onSubmit={handleSubmit} className="space-y-4 max-w-xl">
