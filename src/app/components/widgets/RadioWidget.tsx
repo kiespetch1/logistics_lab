@@ -1,5 +1,5 @@
-// @ts-nocheck
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 'use client';
 
 import { memo, useEffect } from 'react';
