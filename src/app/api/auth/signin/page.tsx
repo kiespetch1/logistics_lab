@@ -15,7 +15,7 @@ export default function SignInPage() {
     // Если пользователь не авторизован, отображаем форму входа
     if (!session) {
         return (
-            <div className="flex items-center justify-center h-screen bg-base-100">
+            <div className="flex items-center justify-center">
                 <SignInForm onSuccess={(callbackUrl) => router.push(callbackUrl)} />
             </div>
         );
