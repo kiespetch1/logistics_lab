@@ -30,7 +30,7 @@ const CurrencyConverter = () => {
                     to="RUB"
                     background-color="#f0f8ff"
                     border-radius="0.1"
-                ></fxwidget-cc>
+                ></fxwidget-cc> as any
             </div>
             <a href="https://currencyrate.today/">CurrencyRate</a>
         </div>
