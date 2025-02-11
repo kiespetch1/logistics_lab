@@ -235,7 +235,7 @@ export default function DataPage() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-[calc(100vh-136px)]">
-            <h1 className="text-3xl font-bold py-6">Просмотр данных логистики</h1>
+            <h1 className="text-3xl font-bold py-6">Просмотр данных БД логистической компании</h1>
             <div className="p-4 flex flex-col items-center w-full max-w-4xl">
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700">

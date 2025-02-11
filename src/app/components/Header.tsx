@@ -1,5 +1,4 @@
-﻿// app/components/Header.tsx
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import {signIn, signOut, useSession} from "next-auth/react";
@@ -8,15 +7,13 @@ export default function Header() {
     const {data: session, status} = useSession();
 
     return (
-        <header className="navbar bg-base-200">
-            {/* Левая часть — название */}
+        <header className="navbar bg-base-200 z-20">
             <div className="flex pr-2">
                 <Link href="/" className="btn btn-ghost normal-case text-xl">
                     Данные о логистике
                 </Link>
             </div>
 
-            {/* Центр — навигационные ссылки */}
             <div className="flex self-center">
                 <ul className="menu menu-horizontal p-0">
                     <li>
@@ -31,10 +28,15 @@ export default function Header() {
                     <li>
                         <a href="/orders">Просмотр таблиц</a>
                     </li>
+                    <li>
+                        <a href="/feed">RSS-фид</a>
+                    </li>
+                    <li>
+                        <a href="/widgets">Виджеты</a>
+                    </li>
                 </ul>
             </div>
 
-            {/* Правая часть — статус авторизации и кнопка */}
             <div className="flex-none ml-auto">
                 {status === "loading" ? (
                     <span>Loading...</span>
