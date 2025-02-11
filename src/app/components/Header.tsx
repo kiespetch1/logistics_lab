@@ -28,6 +28,9 @@ export default function Header() {
                     <li>
                         <a href="/logistics">Логистические компании</a>
                     </li>
+                    <li>
+                        <a href="/orders">Просмотр таблиц</a>
+                    </li>
                 </ul>
             </div>
 
