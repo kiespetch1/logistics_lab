@@ -19,6 +19,7 @@ const CurrencyConverter = () => {
         <div>
             <div ref={widgetRef}>
                 <fxwidget-cc
+                    {/* @ts-ignore */}
                     amount="1"
                     decimals="2"
                     large="false"
@@ -30,7 +31,7 @@ const CurrencyConverter = () => {
                     to="RUB"
                     background-color="#f0f8ff"
                     border-radius="0.1"
-                ></fxwidget-cc> as any
+                ></fxwidget-cc>
             </div>
             <a href="https://currencyrate.today/">CurrencyRate</a>
         </div>
