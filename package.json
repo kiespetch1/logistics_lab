@@ -6,8 +6,8 @@
   },
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "npx prisma generate && npx prisma migrate deploy && npx prisma db seed && next dev --turbopack",
+    "build": "npx prisma generate && npx prisma migrate deploy && npx prisma db seed && next build",
     "start": "next start",
     "lint": "next lint"
   },

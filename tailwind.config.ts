@@ -22,9 +22,4 @@ export default {
         },
     },
     plugins: [daisyui],
-    daisyui: {
-        themes: [
-            "winter",
-        ],
-    },
 } satisfies ExtendedConfig;

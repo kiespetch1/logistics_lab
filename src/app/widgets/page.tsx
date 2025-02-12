@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const WidgetsPage = () => (
     <div className="pb-8">
-        <h1 className="mb-8 mt-10 text-center text-3xl font-semibold text-slate-600">
+        <h1 className="mb-8 mt-10 text-center text-3xl font-semibold">
             Полезные виджеты
         </h1>
 
