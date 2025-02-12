@@ -5,9 +5,9 @@ import {blacklistResponse} from "~/data/blacklist-response";
 const blockedHost = 'Validator.nu/LV https://validator.w3.org/services';
 
 export function middleware(request: NextRequest) {
-    const hostname = request.headers.get('User-Agent');
+    const agent = request.headers.get('User-Agent');
 
-    if (hostname === blockedHost) {
+    if (agent === blockedHost) {
         return new NextResponse(blacklistResponse, {
             status: 200,
             headers: { 'Content-Type': 'text/html' },

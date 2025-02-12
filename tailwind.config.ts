@@ -1,6 +1,12 @@
 import daisyui from "daisyui";
 import type {Config} from "tailwindcss";
 
+interface ExtendedConfig extends Config {
+    daisyui?: {
+        themes: string[];
+    };
+}
+
 export default {
     content: [
         "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -16,4 +22,9 @@ export default {
         },
     },
     plugins: [daisyui],
-} satisfies Config;
+    daisyui: {
+        themes: [
+            "winter",
+        ],
+    },
+} satisfies ExtendedConfig;

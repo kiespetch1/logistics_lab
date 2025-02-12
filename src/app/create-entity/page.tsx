@@ -1,7 +1,7 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import {signIn, useSession} from "next-auth/react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 type EntityType = "client" | "order" | "transport" | "warehouse" | "route";
@@ -23,7 +23,7 @@ interface TransportRef {
 }
 
 export default function CreateEntityPage() {
-    const { data: session, status } = useSession();
+    const {data: session, status} = useSession();
 
     // Основной стейт для выбора типа
     const [entityType, setEntityType] = useState<EntityType>("client");
@@ -92,6 +92,7 @@ export default function CreateEntityPage() {
                 console.error("Ошибка при загрузке справочных данных", err);
             }
         }
+
         fetchRefs();
     }, []);
 
@@ -102,7 +103,11 @@ export default function CreateEntityPage() {
 
     // Если пользователь не авторизован
     if (!session) {
-        return <div className="p-4 text-red-500">Нет доступа: вы не авторизованы.</div>;
+        return <div className="p-4 text-red-500 flex flex-col text-2xl items-center">Нет доступа: вы не авторизованы.
+            <button onClick={() => signIn()} className="btn btn-primary mt-2">
+                Войти
+            </button>
+        </div>;
     }
 
     // Обработчик отправки формы
@@ -169,7 +174,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={clientData.name}
-                                onChange={(e) => setClientData({ ...clientData, name: e.target.value })}
+                                onChange={(e) => setClientData({...clientData, name: e.target.value})}
                             />
                         </div>
                         <div>
@@ -177,7 +182,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={clientData.contactPerson}
-                                onChange={(e) => setClientData({ ...clientData, contactPerson: e.target.value })}
+                                onChange={(e) => setClientData({...clientData, contactPerson: e.target.value})}
                             />
                         </div>
                         <div>
@@ -185,7 +190,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={clientData.phone}
-                                onChange={(e) => setClientData({ ...clientData, phone: e.target.value })}
+                                onChange={(e) => setClientData({...clientData, phone: e.target.value})}
                             />
                         </div>
                         <div>
@@ -193,7 +198,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={clientData.email}
-                                onChange={(e) => setClientData({ ...clientData, email: e.target.value })}
+                                onChange={(e) => setClientData({...clientData, email: e.target.value})}
                             />
                         </div>
                         <div>
@@ -201,7 +206,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={clientData.address}
-                                onChange={(e) => setClientData({ ...clientData, address: e.target.value })}
+                                onChange={(e) => setClientData({...clientData, address: e.target.value})}
                             />
                         </div>
                     </>
@@ -215,7 +220,7 @@ export default function CreateEntityPage() {
                             <select
                                 className="select select-bordered w-full"
                                 value={orderData.clientId}
-                                onChange={(e) => setOrderData({ ...orderData, clientId: e.target.value })}
+                                onChange={(e) => setOrderData({...orderData, clientId: e.target.value})}
                             >
                                 <option value="">Выберите клиента</option>
                                 {clientRefs.map((c) => (
@@ -230,7 +235,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={orderData.cargoType}
-                                onChange={(e) => setOrderData({ ...orderData, cargoType: e.target.value })}
+                                onChange={(e) => setOrderData({...orderData, cargoType: e.target.value})}
                             />
                         </div>
                         <div>
@@ -239,7 +244,7 @@ export default function CreateEntityPage() {
                                 type="number"
                                 className="input input-bordered w-full"
                                 value={orderData.weight}
-                                onChange={(e) => setOrderData({ ...orderData, weight: +e.target.value })}
+                                onChange={(e) => setOrderData({...orderData, weight: +e.target.value})}
                             />
                         </div>
                         <div>
@@ -248,7 +253,7 @@ export default function CreateEntityPage() {
                                 type="number"
                                 className="input input-bordered w-full"
                                 value={orderData.volume}
-                                onChange={(e) => setOrderData({ ...orderData, volume: +e.target.value })}
+                                onChange={(e) => setOrderData({...orderData, volume: +e.target.value})}
                             />
                         </div>
                         <div>
@@ -257,7 +262,7 @@ export default function CreateEntityPage() {
                                 type="date"
                                 className="input input-bordered w-full"
                                 value={orderData.departureDate}
-                                onChange={(e) => setOrderData({ ...orderData, departureDate: e.target.value })}
+                                onChange={(e) => setOrderData({...orderData, departureDate: e.target.value})}
                             />
                         </div>
                         <div>
@@ -266,7 +271,7 @@ export default function CreateEntityPage() {
                                 type="date"
                                 className="input input-bordered w-full"
                                 value={orderData.deliveryDate}
-                                onChange={(e) => setOrderData({ ...orderData, deliveryDate: e.target.value })}
+                                onChange={(e) => setOrderData({...orderData, deliveryDate: e.target.value})}
                             />
                         </div>
                         <div>
@@ -274,7 +279,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={orderData.status}
-                                onChange={(e) => setOrderData({ ...orderData, status: e.target.value })}
+                                onChange={(e) => setOrderData({...orderData, status: e.target.value})}
                             />
                         </div>
                     </>
@@ -288,7 +293,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={transportData.type}
-                                onChange={(e) => setTransportData({ ...transportData, type: e.target.value })}
+                                onChange={(e) => setTransportData({...transportData, type: e.target.value})}
                             />
                         </div>
                         <div>
@@ -297,7 +302,7 @@ export default function CreateEntityPage() {
                                 type="number"
                                 className="input input-bordered w-full"
                                 value={transportData.capacity}
-                                onChange={(e) => setTransportData({ ...transportData, capacity: +e.target.value })}
+                                onChange={(e) => setTransportData({...transportData, capacity: +e.target.value})}
                             />
                         </div>
                         <div>
@@ -305,7 +310,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={transportData.vehicleNumber}
-                                onChange={(e) => setTransportData({ ...transportData, vehicleNumber: e.target.value })}
+                                onChange={(e) => setTransportData({...transportData, vehicleNumber: e.target.value})}
                             />
                         </div>
                         <div>
@@ -313,7 +318,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={transportData.status}
-                                onChange={(e) => setTransportData({ ...transportData, status: e.target.value })}
+                                onChange={(e) => setTransportData({...transportData, status: e.target.value})}
                             />
                         </div>
                     </>
@@ -327,7 +332,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={warehouseData.name}
-                                onChange={(e) => setWarehouseData({ ...warehouseData, name: e.target.value })}
+                                onChange={(e) => setWarehouseData({...warehouseData, name: e.target.value})}
                             />
                         </div>
                         <div>
@@ -335,7 +340,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={warehouseData.address}
-                                onChange={(e) => setWarehouseData({ ...warehouseData, address: e.target.value })}
+                                onChange={(e) => setWarehouseData({...warehouseData, address: e.target.value})}
                             />
                         </div>
                         <div>
@@ -344,7 +349,7 @@ export default function CreateEntityPage() {
                                 type="number"
                                 className="input input-bordered w-full"
                                 value={warehouseData.capacity}
-                                onChange={(e) => setWarehouseData({ ...warehouseData, capacity: +e.target.value })}
+                                onChange={(e) => setWarehouseData({...warehouseData, capacity: +e.target.value})}
                             />
                         </div>
                         <div>
@@ -353,7 +358,7 @@ export default function CreateEntityPage() {
                                 type="number"
                                 className="input input-bordered w-full"
                                 value={warehouseData.currentLoad}
-                                onChange={(e) => setWarehouseData({ ...warehouseData, currentLoad: +e.target.value })}
+                                onChange={(e) => setWarehouseData({...warehouseData, currentLoad: +e.target.value})}
                             />
                         </div>
                     </>
@@ -367,7 +372,7 @@ export default function CreateEntityPage() {
                             <select
                                 className="select select-bordered w-full"
                                 value={routeData.orderId}
-                                onChange={(e) => setRouteData({ ...routeData, orderId: e.target.value })}
+                                onChange={(e) => setRouteData({...routeData, orderId: e.target.value})}
                             >
                                 <option value="">Выберите заказ</option>
                                 {orderRefs.map((o) => (
@@ -382,7 +387,7 @@ export default function CreateEntityPage() {
                             <select
                                 className="select select-bordered w-full"
                                 value={routeData.transportId}
-                                onChange={(e) => setRouteData({ ...routeData, transportId: e.target.value })}
+                                onChange={(e) => setRouteData({...routeData, transportId: e.target.value})}
                             >
                                 <option value="">Выберите транспорт</option>
                                 {transportRefs.map((t) => (
@@ -397,7 +402,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={routeData.startPoint}
-                                onChange={(e) => setRouteData({ ...routeData, startPoint: e.target.value })}
+                                onChange={(e) => setRouteData({...routeData, startPoint: e.target.value})}
                             />
                         </div>
                         <div>
@@ -405,7 +410,7 @@ export default function CreateEntityPage() {
                             <input
                                 className="input input-bordered w-full"
                                 value={routeData.endPoint}
-                                onChange={(e) => setRouteData({ ...routeData, endPoint: e.target.value })}
+                                onChange={(e) => setRouteData({...routeData, endPoint: e.target.value})}
                             />
                         </div>
                         <div>
@@ -414,7 +419,7 @@ export default function CreateEntityPage() {
                                 type="number"
                                 className="input input-bordered w-full"
                                 value={routeData.distance}
-                                onChange={(e) => setRouteData({ ...routeData, distance: +e.target.value })}
+                                onChange={(e) => setRouteData({...routeData, distance: +e.target.value})}
                             />
                         </div>
                         <div>
@@ -423,7 +428,7 @@ export default function CreateEntityPage() {
                                 type="number"
                                 className="input input-bordered w-full"
                                 value={routeData.estimatedTime}
-                                onChange={(e) => setRouteData({ ...routeData, estimatedTime: +e.target.value })}
+                                onChange={(e) => setRouteData({...routeData, estimatedTime: +e.target.value})}
                             />
                         </div>
                     </>

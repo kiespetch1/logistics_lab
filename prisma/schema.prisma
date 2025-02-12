@@ -12,7 +12,7 @@ generator client {
 // -----------------------
 
 model Account {
-  id                String   @id @default(cuid())
+  id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
@@ -40,9 +40,9 @@ model Session {
 }
 
 model User {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?  @unique
+  email         String?   @unique
   password      String?
   emailVerified DateTime?
   image         String?
@@ -65,61 +65,67 @@ model VerificationToken {
 
 // 1. Таблица "Clients" – хранение информации о компаниях или частных лицах
 model Client {
-  id            String  @id @default(cuid())
-  name          String  // Название компании/клиента
-  contactPerson String  // Контактное лицо
+  id            String @id @default(cuid())
+  name          String // Название компании/клиента
+  contactPerson String // Контактное лицо
   phone         String
   email         String
   address       String
 
-  orders        Order[]
+  orders Order[]
 }
 
 // 2. Таблица "Orders" – хранение информации о заказах на перевозку грузов
 model Order {
-  id             String   @id @default(cuid())
-  clientId       String
-  cargoType      String
-  weight         Float
-  volume         Float
-  departureDate  DateTime
-  deliveryDate   DateTime?
-  status         String
+  id            String    @id @default(cuid())
+  clientId      String
+  cargoType     String
+  weight        Float
+  volume        Float
+  departureDate DateTime
+  deliveryDate  DateTime?
+  status        String
 
-  client         Client   @relation(fields: [clientId], references: [id])
-  routes         Route[]  // изменено: теперь у заказа может быть несколько маршрутов
+  client Client  @relation(fields: [clientId], references: [id])
+  routes Route[] // изменено: теперь у заказа может быть несколько маршрутов
 }
 
 // 3. Таблица "Transport" – хранение сведений о транспортных средствах
 model Transport {
-  id            String   @id @default(cuid())
-  type          String   // Тип транспортного средства (truck, train, ship, plane и т.д.)
-  capacity      Float    // Грузоподъемность (например, в тоннах)
-  vehicleNumber String   // Регистрационный номер транспортного средства
-  status        String   // Статус (например, "available", "busy", "maintenance")
+  id            String @id @default(cuid())
+  type          String // Тип транспортного средства (truck, train, ship, plane и т.д.)
+  capacity      Float // Грузоподъемность (например, в тоннах)
+  vehicleNumber String // Регистрационный номер транспортного средства
+  status        String // Статус (например, "available", "busy", "maintenance")
 
-  routes        Route[]
+  routes Route[]
 }
 
 // 4. Таблица "Warehouse" – учет складских помещений для хранения грузов
 model Warehouse {
-  id          String  @id @default(cuid())
-  name        String  // Название склада
+  id          String @id @default(cuid())
+  name        String // Название склада
   address     String
-  capacity    Float   // Максимальная загрузка
-  currentLoad Float   // Текущая загрузка
+  capacity    Float // Максимальная загрузка
+  currentLoad Float // Текущая загрузка
 }
 
 // 5. Таблица "Route" – привязка заказов к транспортным средствам с описанием маршрута перевозки
 model Route {
-  id            String   @id @default(cuid())
-  orderId       String   // теперь не уникальное поле
+  id            String @id @default(cuid())
+  orderId       String // теперь не уникальное поле
   transportId   String
   startPoint    String
   endPoint      String
   distance      Float
   estimatedTime Int
 
-  order         Order    @relation(fields: [orderId], references: [id])
-  transport     Transport @relation(fields: [transportId], references: [id])
+  order     Order     @relation(fields: [orderId], references: [id])
+  transport Transport @relation(fields: [transportId], references: [id])
+}
+
+model ExternalFeed {
+  id        String   @id @default(cuid())
+  feedUrl   String   @unique
+  createdAt DateTime @default(now())
 }
