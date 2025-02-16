@@ -14,25 +14,37 @@ export default function Header() {
                 </Link>
             </div>
 
-            <div className="flex self-center">
+            <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
+                    <div className="dropdown dropdown-hover dropdown-bottom flex">
+                        <label tabIndex={0} className="cursor-pointer py-2 px-4">База данных</label>
+                        <ul tabIndex={0}
+                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                            <li>
+                                <Link href="/create-entity">Добавить запись</Link>
+                            </li>
+                            <li>
+                                <Link href="/stats">Статистика</Link>
+                            </li>
+                            <li>
+                                <Link href="/tables">Просмотр таблиц</Link>
+                            </li>
+                        </ul>
+                    </div>
                     <li>
-                        <a href="/create-entity">Добавить запись</a>
+                        <Link href="/logistics">Логистические компании</Link>
                     </li>
                     <li>
-                        <a href="/stats">Статистика</a>
+                        <Link href="/feed">RSS-фид</Link>
                     </li>
                     <li>
-                        <a href="/logistics">Логистические компании</a>
+                        <Link href="/widgets">Виджеты</Link>
                     </li>
                     <li>
-                        <a href="/orders">Просмотр таблиц</a>
+                        <Link href="/articles">Статьи</Link>
                     </li>
                     <li>
-                        <a href="/feed">RSS-фид</a>
-                    </li>
-                    <li>
-                        <a href="/widgets">Виджеты</a>
+                        <Link href="/contacts">Контакты</Link>
                     </li>
                 </ul>
             </div>
