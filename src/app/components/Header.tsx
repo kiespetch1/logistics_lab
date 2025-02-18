@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {signIn, signOut, useSession} from "next-auth/react";
+import YandexSearch from "@/app/components/YandexSearch";
 
 export default function Header() {
     const {data: session, status} = useSession();
@@ -50,6 +51,8 @@ export default function Header() {
             </div>
 
             <div className="flex-none ml-auto">
+                <YandexSearch/>
+
                 {status === "loading" ? (
                     <span>Loading...</span>
                 ) : session ? (
