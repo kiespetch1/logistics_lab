@@ -1,11 +1,8 @@
-// prisma/seed.ts
-
 import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-// Сидирование пользователя (NextAuth)
 async function seedUsers() {
     const userCount = await prisma.user.count();
     if (userCount > 0) {
@@ -25,7 +22,6 @@ async function seedUsers() {
     console.log('User seeded:', user);
 }
 
-// Сидирование клиентов
 async function seedClients() {
     const clientCount = await prisma.client.count();
     if (clientCount > 0) {
@@ -63,7 +59,6 @@ async function seedClients() {
     console.log('Clients seeded:', clients);
 }
 
-// Сидирование заказов
 async function seedOrders() {
     const orderCount = await prisma.order.count();
     if (orderCount > 0) {
@@ -71,7 +66,6 @@ async function seedOrders() {
         return;
     }
 
-    // Получаем всех клиентов, чтобы связать с заказами
     const clients = await prisma.client.findMany();
     if (clients.length === 0) {
         console.log("No clients found. Skipping order seeding.");
@@ -79,7 +73,6 @@ async function seedOrders() {
     }
 
     const ordersData = [];
-    // Для каждого клиента создаём по два заказа
     for (const client of clients) {
         ordersData.push({
             clientId: client.id,
@@ -107,7 +100,6 @@ async function seedOrders() {
     console.log('Orders seeded:', orders);
 }
 
-// Сидирование транспортных средств
 async function seedTransport() {
     const transportCount = await prisma.transport.count();
     if (transportCount > 0) {
@@ -142,7 +134,6 @@ async function seedTransport() {
     console.log('Transports seeded:', transports);
 }
 
-// Сидирование складов
 async function seedWarehouse() {
     const warehouseCount = await prisma.warehouse.count();
     if (warehouseCount > 0) {
@@ -171,7 +162,6 @@ async function seedWarehouse() {
     console.log('Warehouses seeded:', warehouses);
 }
 
-// Сидирование маршрутов
 async function seedRoutes() {
     const routeCount = await prisma.route.count();
     if (routeCount > 0) {
@@ -179,7 +169,6 @@ async function seedRoutes() {
         return;
     }
 
-    // Для создания маршрута нужны заказы и транспорт
     const orders = await prisma.order.findMany();
     const transports = await prisma.transport.findMany();
 
@@ -188,7 +177,6 @@ async function seedRoutes() {
         return;
     }
 
-    // Для каждого заказа создадим маршрут, выбирая случайное транспортное средство
     const routesData = orders.map(order => {
         const randomTransport = transports[Math.floor(Math.random() * transports.length)];
         return {
@@ -197,7 +185,7 @@ async function seedRoutes() {
             startPoint: 'Москва',
             endPoint: 'Санкт-Петербург',
             distance: 250,
-            estimatedTime: 180, // в минутах (3 часа)
+            estimatedTime: 180,
         };
     });
 
@@ -207,7 +195,6 @@ async function seedRoutes() {
     console.log('Routes seeded:', routes);
 }
 
-// Главная функция сидирования
 async function main() {
     await seedUsers();
     await seedClients();
