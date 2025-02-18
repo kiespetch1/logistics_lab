@@ -190,7 +190,7 @@ export default function CreateEntityPage() {
                     body = routeData;
                     break;
             }
-            body.entityType = entityType; // укажем тип сущности явно
+            body.entityType = entityType;
 
             const res = await axios.post("/api/create-entity", body);
             console.log("Создан объект:", res.data);
