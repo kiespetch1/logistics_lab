@@ -57,7 +57,6 @@ export default function DataPage() {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
 
-    // Функция для загрузки данных через API-роут
     const fetchData = async () => {
         setLoading(true);
         setError("");
@@ -72,12 +71,10 @@ export default function DataPage() {
         }
     };
 
-    // Очищаем данные при смене выбранной категории
     useEffect(() => {
         setData([]);
     }, [selectedOption]);
 
-    // Функция для рендера таблицы с видом, аналогичным второму примеру
     const renderTable = () => {
         if (!data || data.length === 0) return <p>Нет данных для отображения.</p>;
 
