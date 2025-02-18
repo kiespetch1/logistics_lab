@@ -6,7 +6,6 @@ import axios from "axios";
 
 type EntityType = "client" | "order" | "transport" | "warehouse" | "route";
 
-// Интерфейсы для хранения справочных данных (например, для связей)
 interface ClientRef {
     id: string;
     name: string;
