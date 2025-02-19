@@ -23,7 +23,7 @@ export default function CabotageCancelPage() {
                         dangerouslySetInnerHTML={{__html: content}}
                     />
                 </div>
-            </div>0
+            </div>
         </div>
     );
 }

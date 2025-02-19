@@ -47,9 +47,27 @@ export default function Header() {
                     <li>
                         <Link href="/articles">Статьи</Link>
                     </li>
-                    <li>
-                        <Link href="/contacts">Контакты</Link>
-                    </li>
+                    <div className="dropdown dropdown-hover dropdown-bottom flex">
+                        <label tabIndex={0} className="cursor-pointer py-2 px-4">Информация</label>
+                        <ul tabIndex={0}
+                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                            <li>
+                                <Link href="/contacts">Контакты</Link>
+                            </li>
+                            <li>
+                                <Link href="/offer">О нас</Link>
+                            </li>
+                            <li>
+                                <Link href="/tariffs">Тарифы</Link>
+                            </li>
+                            <li>
+                                <Link href="/promotions">Акции</Link>
+                            </li>
+                            <li>
+                                <Link href="/legal">Оферта</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </ul>
             </div>
 

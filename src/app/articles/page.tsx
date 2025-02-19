@@ -21,6 +21,11 @@ export default function ArticlesPage() {
                         Одних отмена запрета на каботаж пугает, других – вдохновляет
                     </Link>
                 </li>
+                <li>
+                    <Link href="/articles/china-market-rate-drop" className="text-blue-600 hover:underline">
+                        В начале 2025 года китайские бренды потеряли долю на рынке большегрузов
+                    </Link>
+                </li>
             </ul>
         </div>
     );
