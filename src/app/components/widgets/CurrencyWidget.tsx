@@ -1,25 +1,16 @@
-/* eslint-disable */
-// @ts-nocheck
-import { useEffect, useRef } from 'react'
+"use client";
 
-const CurrencyConverter = () => {
-    const widgetRef = useRef(null )
+import Script from "next/script";
 
-    useEffect(() => {
-        const script = document.createElement('script')
-        script.src = 'https://s.fx-w.io/widgets/currency-converter/latest.js'
-        script.async = true
-
-        document.body.appendChild(script)
-
-        return () => {
-            document.body.removeChild(script)
-        }
-    }, [])
-
+const CurrencyWidget = () => {
     return (
         <div>
-            <div ref={widgetRef}>
+            {/* Скрипт будет загружен после инициализации страницы */}
+            <Script
+                src="https://s.fx-w.io/widgets/currency-converter/latest.js"
+                strategy="afterInteractive"
+            />
+            <div>
                 <fxwidget-cc
                     amount="1"
                     decimals="2"
@@ -35,8 +26,10 @@ const CurrencyConverter = () => {
                 ></fxwidget-cc>
             </div>
             <a href="https://currencyrate.today/">CurrencyRate</a>
+            <br/>
+            Виджет курс валют
         </div>
-    )
-}
+    );
+};
 
-export default CurrencyConverter
+export default CurrencyWidget;

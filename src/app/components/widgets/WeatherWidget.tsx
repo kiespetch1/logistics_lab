@@ -16,11 +16,13 @@ const WeatherWidget = () => {
     };
   }, []);
 
-  return (
+  return (<div>
       <div
           className="elfsight-app-6d8e2ef2-c0fc-425b-8b9f-373878d5d685"
           data-elfsight-app-lazy
       />
+    Виджет погода
+  </div>
   );
 };
 

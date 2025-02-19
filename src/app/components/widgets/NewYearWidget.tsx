@@ -10,6 +10,8 @@ const NewYearWidget = () => {
             ></iframe>
             <br />
             <a href="https://calculator888.ru/calculator-site">Calculator888.ru</a>
+            <br/>
+            Виджет время до нового года
         </div>
     )
 }
