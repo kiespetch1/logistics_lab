@@ -1,16 +1,21 @@
-"use client";
-
-import { useState, FormEvent } from "react";
+import {useState, FormEvent, JSX} from "react";
 import axios from "axios";
-import TableForModel, { ModelOption } from "./TableForModel";
+import TableForModel, {ModelOption} from "./TableForModel";
 
-const DataAccordionItem = ({ model, label }) => {
+interface DataAccordionItemProps {
+    model: ModelOption;
+    label: string;
+}
+
+export default function DataAccordionItem({
+                                              model,
+                                              label,
+                                          }: DataAccordionItemProps): JSX.Element {
     const [data, setData] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>("");
     const [search, setSearch] = useState<string>("");
 
-    // Показываем поле поиска для моделей "client" и "warehouse"
     const showSearchInput = model === "client" || model === "warehouse";
 
     const fetchData = async (e?: FormEvent) => {
@@ -18,7 +23,6 @@ const DataAccordionItem = ({ model, label }) => {
         setLoading(true);
         setError("");
         try {
-            // Формируем URL с параметрами
             let url = `/api/references?model=${model}`;
             if (showSearchInput && search) {
                 url += `&search=${encodeURIComponent(search)}`;
@@ -36,7 +40,7 @@ const DataAccordionItem = ({ model, label }) => {
     return (
         <div className="collapse bg-base-200">
             {/* Если нужно, чтобы открывался только один аккордеон одновременно, используем name одинаковым для всех */}
-            <input type="radio" name="my-accordion-1" />
+            <input type="radio" name="my-accordion-1"/>
             <div className="collapse-title text-xl font-medium">{label}</div>
             <div className="collapse-content">
                 <form onSubmit={fetchData} className="mb-4">
@@ -60,11 +64,9 @@ const DataAccordionItem = ({ model, label }) => {
                 ) : error ? (
                     <p className="text-red-500">{error}</p>
                 ) : (
-                    <TableForModel model={model} data={data} />
+                    <TableForModel model={model} data={data}/>
                 )}
             </div>
         </div>
     );
-};
-
-export default DataAccordionItem;
+}
