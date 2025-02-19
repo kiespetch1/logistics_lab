@@ -46,11 +46,11 @@ export default function PromotionsPage() {
                 {promotions.map((promo) => (
                     <div
                         key={promo.id}
-                        className="card w-full bg-white shadow-md rounded-lg mb-6 p-6 border border-gray-200"
+                        className="card w-full bg-base-100 shadow-md rounded-lg mb-6 p-6 border border-gray-200"
                     >
                         <h2 className="text-2xl font-semibold mb-2">{promo.title}</h2>
-                        <p className="text-gray-700 mb-4">{promo.description}</p>
-                        <p className="text-sm text-gray-500">
+                        <p className="mb-4">{promo.description}</p>
+                        <p className="text-sm text-base-content">
                             Действует с {new Date(promo.validFrom).toLocaleDateString()} до{" "}
                             {new Date(promo.validTo).toLocaleDateString()}
                         </p>

@@ -10,7 +10,7 @@ export default function OfferPage() {
             </header>
 
             {/* Main Content */}
-            <main className="flex-grow container mx-auto px-4 py-8">
+            <div className="flex-grow container bg-base-100 mx-auto px-4 py-8">
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold mb-2">Целевая аудитория</h2>
                     <p className="mb-4">
@@ -53,7 +53,7 @@ export default function OfferPage() {
                     <p className="mb-1">Email: info@logistics-company.ru</p>
                     <p>Адрес: ул. Логистическая, д. 10, Москва, Россия</p>
                 </section>
-            </main>
+            </div>
 
             {/* Footer */}
             <footer className="bg-blue-600 text-white p-4 text-center">

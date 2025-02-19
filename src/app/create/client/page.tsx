@@ -39,8 +39,8 @@ export default function CreateClientPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="card p-6 shadow-md bg-white w-full max-w-md">
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="card p-6 shadow-md bg-base-100 w-full max-w-md">
                 <h1 className="text-xl font-bold mb-4 text-center">Создание клиента</h1>
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
                 <form onSubmit={handleSubmit} className="space-y-4">

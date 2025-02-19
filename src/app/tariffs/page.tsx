@@ -63,16 +63,16 @@ export default function TariffsPage() {
                 <div className="overflow-x-auto">
                     <table className="table w-full border-collapse">
                         <thead>
-                        <tr className="bg-gray-200">
-                            <th className="border p-2">Название тарифа</th>
-                            <th className="border p-2">Описание</th>
-                            <th className="border p-2">Цена (₽)</th>
-                            <th className="border p-2">Дата начала</th>
+                        <tr className="bg-base-100">
+                            <th className="border text-base-content p-2">Название тарифа</th>
+                            <th className="border text-base-content p-2">Описание</th>
+                            <th className="border text-base-content p-2">Цена (₽)</th>
+                            <th className="border text-base-content p-2">Дата начала</th>
                         </tr>
                         </thead>
                         <tbody>
                         {staticTariffs.map((tariff) => (
-                            <tr key={crypto.randomUUID()} className="hover:bg-gray-100">
+                            <tr key={crypto.randomUUID()} className="hover:bg-base-100">
                                 <td className="border p-2">{tariff.name}</td>
                                 <td className="border p-2">{tariff.description}</td>
                                 <td className="border p-2">{tariff.price}</td>
