@@ -21,6 +21,7 @@ export default function ContactsPage() {
                         <div>
                             <h2 className="text-xl font-bold">Телефон</h2>
                             <p>+7 (495) 123-45-67</p>
+                            <p>Егор Черемисинов</p>
                         </div>
                         <div>
                             <h2 className="text-xl font-bold">Электронная почта</h2>

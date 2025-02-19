@@ -8,14 +8,12 @@ export async function GET(request: Request) {
 
         switch (model) {
             case "client": {
-                // Выбираем основные поля для клиента
                 const clients = await prisma.client.findMany({
                     select: { id: true, name: true, contactPerson: true, phone: true, email: true, address: true },
                 });
                 return NextResponse.json(clients);
             }
             case "order": {
-                // Выбираем поля заказа
                 const orders = await prisma.order.findMany({
                     select: {
                         id: true,
