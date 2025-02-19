@@ -44,7 +44,7 @@ export default function RegisterPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-base-100">
+        <div className="min-h-screen flex items-center justify-center">
             <div className="card p-6 shadow-md bg-base-200 w-full max-w-sm">
                 <h2 className="text-2xl font-bold mb-4 text-center">Регистрация</h2>
                 {error && <div className="mb-4 text-center text-red-500">{error}</div>}
