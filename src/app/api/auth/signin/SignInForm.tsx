@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import {useState} from "react";
+import {signIn} from "next-auth/react";
+import {useSearchParams} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface SignInResponse {
     error?: string;
@@ -21,7 +22,8 @@ interface SignInFormProps {
     onSuccess: (callbackUrl: string) => void;
 }
 
-export default function SignInForm({ onSuccess }: SignInFormProps) {
+
+export default function SignInForm({onSuccess}: SignInFormProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -70,35 +72,35 @@ export default function SignInForm({ onSuccess }: SignInFormProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="card p-6 shadow-md bg-base-200 w-full max-w-sm">
-            <h2 className="text-2xl font-bold mb-4 text-center">Авторизация</h2>
-            {error && <div className="mb-4 text-center text-red-500">{error}</div>}
-            <div className="mb-4">
-                <label htmlFor="email" className="label">Эл. почта</label>
-                <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="input input-bordered w-full"
-                    placeholder="email@example.com"
-                    required
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="password" className="label">Пароль</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="input input-bordered w-full"
-                    required
-                />
-            </div>
-            <button type="submit" className="btn btn-primary w-full">
-                Войти
-            </button>
-        </form>
+            <form onSubmit={handleSubmit} className="card p-6 shadow-md bg-base-200 w-full max-w-s flex justify-center items-center">
+                <h2 className="text-2xl font-bold mb-4 text-center">Авторизация</h2>
+                {error && <div className="mb-4 text-center text-red-500">{error}</div>}
+                <div className="mb-4">
+                    <label htmlFor="email" className="label">Эл. почта</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="input input-bordered w-full"
+                        placeholder="email@example.com"
+                        required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="password" className="label">Пароль</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="input input-bordered w-full"
+                        required
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary w-full">
+                    Войти
+                </button>
+            </form>
     );
 }

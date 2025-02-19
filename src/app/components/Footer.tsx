@@ -6,7 +6,8 @@ export default function Footer() {
     return (
         <footer className="footer items-center p-4 bg-base-200 text-base-content">
             <div>
-                <p>© 2025</p>
+                <p>© 2025 Сайт сделан студентом группы ИВТ-Б21 Егором Черемисиновым</p>
+                <p></p>
             </div>
             <div className="flex flex-row items-center md:place-self-center md:justify-self-end">
                 <YandexMetric/>

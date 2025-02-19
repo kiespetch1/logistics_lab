@@ -59,7 +59,6 @@ function removeImagesFromDescription(description: string): string {
 
 export async function GET() {
     try {
-        // Получаем все внешние источники из БД
         const feeds = await prisma.externalFeed.findMany();
         let allArticles: Article[] = [];
         const parser = new XMLParser({
@@ -67,7 +66,6 @@ export async function GET() {
             attributeNamePrefix: "@_",
         });
 
-        // Для каждого источника пытаемся получить и распарсить RSS
         for (const feed of feeds) {
             try {
                 const response = await axios.get(feed.feedUrl, { responseType: 'text' });
@@ -80,7 +78,6 @@ export async function GET() {
                 const jsonObj = parser.parse(xmlData);
                 let items: any[] = [];
 
-                // Обработка RSS 2.0
                 if (jsonObj.rss && jsonObj.rss.channel) {
                     const channel = jsonObj.rss.channel;
                     if (Array.isArray(channel.item)) {
@@ -89,7 +86,6 @@ export async function GET() {
                         items = [channel.item];
                     }
                 }
-                // Обработка Atom
                 else if (jsonObj.feed && jsonObj.feed.entry) {
                     if (Array.isArray(jsonObj.feed.entry)) {
                         items = jsonObj.feed.entry;
@@ -100,7 +96,6 @@ export async function GET() {
                     continue;
                 }
 
-                // Преобразуем каждый элемент в статью
                 const articles = items.map((item) => {
                     const title =
                         (item.title &&
@@ -146,11 +141,9 @@ export async function GET() {
                 allArticles = allArticles.concat(articles);
             } catch (err) {
                 console.error(`Ошибка получения/парсинга фида ${feed.feedUrl}:`, err);
-                // При ошибке просто переходим к следующему источнику
             }
         }
 
-        // Сортировка статей по дате (от новых к старым)
         allArticles.sort(
             (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
         );

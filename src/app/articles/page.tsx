@@ -16,6 +16,11 @@ export default function ArticlesPage() {
                         Складская логистика: стратегии-2025
                     </Link>
                 </li>
+                <li>
+                    <Link href="/articles/cabotage-cancel" className="text-blue-600 hover:underline">
+                        Одних отмена запрета на каботаж пугает, других – вдохновляет
+                    </Link>
+                </li>
             </ul>
         </div>
     );

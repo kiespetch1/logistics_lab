@@ -26,8 +26,15 @@ const ExternalFeedManager: React.FC<ExternalFeedManagerProps> = ({ onFeedsUpdate
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const data = await response.json();
-            setFeeds(data);
+            const data: Feed[] = await response.json();
+
+            const defaultFeed: Feed = { id: -1, feedUrl: 'https://logisticsinfo-lab.vercel.app/feed.xml' };
+
+            const filteredFeeds = data.filter(
+                (feed) => feed.feedUrl !== defaultFeed.feedUrl
+            );
+
+            setFeeds([defaultFeed, ...filteredFeeds]);
         } catch (err) {
             console.error('Ошибка при получении внешних источников:', err);
             setError('Не удалось загрузить внешние источники.');
@@ -114,24 +121,26 @@ const ExternalFeedManager: React.FC<ExternalFeedManagerProps> = ({ onFeedsUpdate
                 </div>
                 <div className="collapse-content">
                     <ul>
-                        {feeds.map((feed) => (
-                            <li key={feed.id} className="flex justify-between items-center mb-2">
-                                <a
-                                    href={feed.feedUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-500 hover:underline"
-                                >
-                                    {feed.feedUrl}
-                                </a>
-                                <button
-                                    className="btn btn-sm btn-error"
-                                    onClick={() => handleDeleteFeed(feed.id)}
-                                >
-                                    Удалить
-                                </button>
-                            </li>
-                        ))}
+                        {feeds
+                            .filter(feed => feed.feedUrl !== 'https://logisticsinfo-lab.vercel.app/feed.xml')
+                            .map((feed) => (
+                                <li key={feed.id} className="flex justify-between items-center mb-2">
+                                    <a
+                                        href={feed.feedUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-500 hover:underline"
+                                    >
+                                        {feed.feedUrl}
+                                    </a>
+                                    <button
+                                        className="btn btn-sm btn-error"
+                                        onClick={() => handleDeleteFeed(feed.id)}
+                                    >
+                                        Удалить
+                                    </button>
+                                </li>
+                            ))}
                     </ul>
                 </div>
             </div>

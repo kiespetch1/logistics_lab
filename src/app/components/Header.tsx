@@ -30,6 +30,9 @@ export default function Header() {
                             <li>
                                 <Link href="/tables">Просмотр таблиц</Link>
                             </li>
+                            <li>
+                                <Link href="/db-queries">Запросы к БД</Link>
+                            </li>
                         </ul>
                     </div>
                     <li>
@@ -63,7 +66,8 @@ export default function Header() {
                         <span className="text-sm font-bold">
               {session.user?.name || session.user?.email}
             </span>
-                        <button onClick={() => signOut()} className="btn btn-primary">
+                        <button onClick={() => signOut({redirect: true, callbackUrl: '/'})}
+                                className="btn btn-primary">
                             Выйти
                         </button>
                     </div>

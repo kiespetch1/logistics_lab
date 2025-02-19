@@ -12,19 +12,20 @@ export default function SignInPage() {
         return <div className="p-4">Загрузка...</div>;
     }
 
-    // Если пользователь не авторизован, отображаем форму входа
     if (!session) {
         return (
-            <div className="flex items-center justify-center">
-                <SignInForm onSuccess={(callbackUrl) => router.push(callbackUrl)} />
+            <div className="flex flex-col items-center justify-center">
+                <SignInForm onSuccess={(callbackUrl) => router.push(callbackUrl)}/>
+                <p className="py-3">или</p>
+                <button className="btn btn-neutral w-full" onClick={() => router.push("/auth/register")}>К регистрации
+                </button>
             </div>
         );
     }
 
-    // Если пользователь уже авторизован, можно отобразить сообщение или перенаправить его
     return (
         <div className="p-4 text-green-500">
-            Вы уже авторизованы. <br />
+        Вы уже авторизованы. <br />
             <button className="btn btn-primary mt-4" onClick={() => router.push("/")}>
                 Перейти на главную
             </button>

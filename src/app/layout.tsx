@@ -38,7 +38,7 @@ export default function RootLayout({
         <Providers>
             <div className="flex flex-col min-h-screen">
                 <Header/>
-                <main className="flex flex-grow justify-center container mx-auto px-4 py-4">
+                <main className="flex flex-grow justify-center container mx-auto px-2 py-4">
                     {children}
                 </main>
                 <Footer/>
