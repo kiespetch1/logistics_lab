@@ -1,9 +1,15 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
+interface ClientRef {
+    id: string;
+    name: string;
+}
+
 export default function CreateOrderPage() {
+    const [clientRefs, setClientRefs] = useState<ClientRef[]>([]);
     const [clientId, setClientId] = useState("");
     const [cargoType, setCargoType] = useState("");
     const [weight, setWeight] = useState<number>(0);
@@ -13,6 +19,19 @@ export default function CreateOrderPage() {
     const [status, setStatus] = useState("Обрабатывается");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+
+    // Загружаем данные о клиентах
+    useEffect(() => {
+        async function fetchClientRefs() {
+            try {
+                const res = await axios.get("/api/references?model=client");
+                setClientRefs(res.data || []);
+            } catch (err) {
+                console.error("Ошибка при загрузке клиентов", err);
+            }
+        }
+        fetchClientRefs();
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -57,13 +76,19 @@ export default function CreateOrderPage() {
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="label">ID клиента</label>
-                        <input
-                            type="text"
-                            className="input input-bordered w-full"
+                        <label className="label">Компания-клиент</label>
+                        <select
+                            className="select select-bordered w-full"
                             value={clientId}
                             onChange={(e) => setClientId(e.target.value)}
-                        />
+                        >
+                            <option value="">Выберите клиента</option>
+                            {clientRefs.map((client) => (
+                                <option key={client.id} value={client.id}>
+                                    {client.name}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div>
                         <label className="label">Тип груза</label>

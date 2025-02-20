@@ -230,7 +230,7 @@ export default function DbQueriesPage() {
             <div className="collapse bg-base-200">
                 <input type="radio" name="accordion" />
                 <div className="collapse-title text-xl font-medium">
-                    Поиск клиентов по названию
+                    Поиск клиентов по названию компании
                 </div>
                 <div className="collapse-content">
                     <form onSubmit={handleClientSearch} className="mb-4">

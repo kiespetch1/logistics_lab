@@ -1,4 +1,7 @@
+'use client';
+
 import React, { useState, useEffect, FormEvent } from 'react';
+import { useSession } from 'next-auth/react';
 
 interface Feed {
     id: number;
@@ -10,6 +13,7 @@ interface ExternalFeedManagerProps {
 }
 
 const ExternalFeedManager: React.FC<ExternalFeedManagerProps> = ({ onFeedsUpdated }) => {
+    const { data: session } = useSession();
     const [feeds, setFeeds] = useState<Feed[]>([]);
     const [newFeedUrl, setNewFeedUrl] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -93,22 +97,28 @@ const ExternalFeedManager: React.FC<ExternalFeedManagerProps> = ({ onFeedsUpdate
     return (
         <div className="card bg-base-100 shadow-md p-4 mb-6">
             <h3 className="text-lg font-semibold mb-4">Управление внешними источниками</h3>
-            <form
-                onSubmit={handleAddFeed}
-                className="flex flex-col sm:flex-row items-start sm:items-center gap-2 mb-4"
-            >
-                <input
-                    type="url"
-                    placeholder="Введите URL RSS-источника"
-                    value={newFeedUrl}
-                    onChange={(e) => setNewFeedUrl(e.target.value)}
-                    className="input input-bordered flex-1"
-                    required
-                />
-                <button type="submit" className="btn btn-primary" disabled={loading}>
-                    {loading ? 'Добавление...' : 'Добавить'}
-                </button>
-            </form>
+            {session ? (
+                <form
+                    onSubmit={handleAddFeed}
+                    className="flex flex-col sm:flex-row items-start sm:items-center gap-2 mb-4"
+                >
+                    <input
+                        type="url"
+                        placeholder="Введите URL RSS-источника"
+                        value={newFeedUrl}
+                        onChange={(e) => setNewFeedUrl(e.target.value)}
+                        className="input input-bordered flex-1"
+                        required
+                    />
+                    <button type="submit" className="btn btn-primary" disabled={loading}>
+                        {loading ? 'Добавление...' : 'Добавить'}
+                    </button>
+                </form>
+            ) : (
+                <p className="text-center text-gray-500 mb-4">
+                    Войдите, чтобы добавить источник.
+                </p>
+            )}
             {error && <p className="text-red-500 mb-2">{error}</p>}
             <div className="collapse collapse-arrow mb-4">
                 <input
@@ -133,12 +143,14 @@ const ExternalFeedManager: React.FC<ExternalFeedManagerProps> = ({ onFeedsUpdate
                                     >
                                         {feed.feedUrl}
                                     </a>
-                                    <button
-                                        className="btn btn-sm btn-error"
-                                        onClick={() => handleDeleteFeed(feed.id)}
-                                    >
-                                        Удалить
-                                    </button>
+                                    {session && (
+                                        <button
+                                            className="btn btn-sm btn-error"
+                                            onClick={() => handleDeleteFeed(feed.id)}
+                                        >
+                                            Удалить
+                                        </button>
+                                    )}
                                 </li>
                             ))}
                     </ul>
